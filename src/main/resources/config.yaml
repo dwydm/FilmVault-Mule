@@ -1,0 +1,5 @@
+http:
+  portMovie: "8081"
+  portSeries: "8082"
+  portPLatform: "8083"
+  portBackend: "8080"

@@ -2,7 +2,7 @@
 <mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
     <apikit:config name="filmvault_movies-api-config" api="resource::f58e0416-d4a2-4186-a5f4-68878368bff4:filmvault_movies-api:1.0.1:raml:zip:filmvault_movies-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
     <flow name="filmvault_movies-api-main">
-        <http:listener path="/api/*" config-ref="HTTP_Global_Listener_config">
+        <http:listener path="/api/*" config-ref="HTTP_Movie_Listener_config">
             <http:response statusCode="#[vars.httpStatus default 200]">
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:response>
@@ -94,7 +94,7 @@ output application/json
         </error-handler>
     </flow>
     <flow name="filmvault_movies-api-console">
-        <http:listener path="/console/*" config-ref="HTTP_Global_Listener_config">
+        <http:listener path="/console/*" config-ref="HTTP_Movie_Listener_config">
             <http:response statusCode="#[vars.httpStatus default 200]">
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:response>
@@ -172,11 +172,12 @@ output application/json
         </ee:transform>
     </flow>
     <flow name="get:\movies:filmvault_movies-api-config">
-        <ee:transform doc:name="Transform Message">
+        <flow-ref doc:name="Flow Reference" doc:id="17abf364-694c-4761-ac60-09dbbdf98c4a" name="getMovies"/>
+<!-- [STUDIO:"Transform Message"]		<ee:transform doc:name="Transform Message">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
----
+&#45;&#45;-
 [
   {
     ID: 1,
@@ -186,7 +187,7 @@ output application/json
     genres: [
       "sci-fi", 
       "action"
-    ],
+    &#93;,
     releaseDate: "1999-03-24",
     runtime: 136,
     posterPath: "/movieposters/the_matrix.jpg",
@@ -194,8 +195,8 @@ output application/json
     regions: [
       "pl-PL", 
       "en-US"
-    ],
-    VODPlatforms: []
+    &#93;,
+    VODPlatforms: [&#93;
   }, 
   {
     ID: 2,
@@ -206,7 +207,7 @@ output application/json
       "drama", 
       "crime", 
       "action"
-    ],
+    &#93;,
     releaseDate: "2005-11-09",
     runtime: 115,
     posterPath: "/movieposters/revolver2005.jpg",
@@ -214,7 +215,7 @@ output application/json
     regions: [
       "pl-PL", 
       "en-GB"
-    ],
+    &#93;,
     VODPlatforms: [
       {
         ID: 1,
@@ -230,11 +231,11 @@ output application/json
         vodURL: "hbogo.com",
         active: true
       }
-    ]
+    &#93;
   }
-]]]></ee:set-payload>
+&#93;&#93;&#93;></ee:set-payload>
             </ee:message>
-        </ee:transform>
+        </ee:transform> [STUDIO] -->
     </flow>
     <flow name="get:\movies\(ID):filmvault_movies-api-config">
         <ee:transform doc:name="Transform Message">

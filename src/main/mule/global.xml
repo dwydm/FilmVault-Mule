@@ -4,7 +4,20 @@
 	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
-	<http:listener-config name="HTTP_Global_Listener_config" doc:name="HTTP Listener config" doc:id="0aa3c8cd-809b-4bd9-ba31-9abd21542da2" >
-		<http:listener-connection host="0.0.0.0" port="8081" />
+	<http:listener-config name="HTTP_Movie_Listener_config" doc:name="HTTP Listener config" doc:id="0aa3c8cd-809b-4bd9-ba31-9abd21542da2" >
+		<http:listener-connection host="localhost" port="8081" />
 	</http:listener-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="9c20ee5f-c492-48c7-9bec-d9b1958297ef" file="config.yaml" />
+	<http:listener-config name="HTTP_TVSeries_Listener_config" doc:name="HTTP Listener config" doc:id="1c87d636-72f7-45e0-9bc4-12674c7e49d3" >
+		<http:listener-connection host="0.0.0.0" port="8082" />
+	</http:listener-config>
+	<http:listener-config name="HTTP_VOD_Listener_config" doc:name="HTTP Listener config" doc:id="7130759b-8cf8-4fe7-ac26-287761ec837b" >
+		<http:listener-connection host="0.0.0.0" port="8083" />
+	</http:listener-config>
+	<http:listener-config name="HTTP_Global_Listener_config" doc:name="HTTP Listener config" doc:id="58c94302-8fce-45aa-9bc4-1353e31cb1af" >
+		<http:listener-connection host="0.0.0.0" port="8084" />
+	</http:listener-config>
+	<http:request-config name="HTTP_Backend_Request_configuration" doc:name="HTTP Request configuration" doc:id="cf799c09-f679-4624-b4d4-05edf82cbdd6" >
+		<http:request-connection host="localhost" port="${http.portBackend}" />
+	</http:request-config>
 </mule>

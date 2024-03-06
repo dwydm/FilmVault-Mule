@@ -1,0 +1,30 @@
+%dw 2.0
+
+type auto_e382feb4_591e_47c9_b095_f246c4b6df7b_Output_Attributes = {|
+  clientCertificate?: {|
+    publicKey?: {|  |}, 
+    "type"?: String, 
+    encoded?: Binary
+  |}, 
+  headers: {|  |}, 
+  listenerPath: String, 
+  method: String, 
+  queryParams: {|
+    genre?: Array<String>, 
+    title?: String, 
+    year?: Number, 
+    vodID?: Number, 
+    adult: Boolean, 
+    page?: Number
+  |}, 
+  queryString: String, 
+  relativePath: String, 
+  remoteAddress: String, 
+  requestPath: String, 
+  requestUri: String, 
+  scheme: String, 
+  uriParams: {|  |}, 
+  version: String, 
+  localAddress: String
+|}
+

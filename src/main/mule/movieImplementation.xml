@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="getMovies" doc:id="03de2d00-2998-4deb-8dd5-7f37d317f45b" >
+		<flow-ref doc:name="Flow Reference" doc:id="72a1c073-d034-49b3-aa4a-a15eb7df4198" name="setQueryParams"/>
+		<logger level="INFO" doc:name="Logger" doc:id="dee28ab9-1317-4708-844f-2b6fb1147961" />
+	</flow>
+	<sub-flow name="setQueryParams" doc:id="293af69d-54e8-42ca-a542-68160b873342" >
+	</sub-flow>
+</mule>

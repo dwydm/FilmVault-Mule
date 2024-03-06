@@ -1,0 +1,15 @@
+%dw 2.0
+
+type auto_03de2d00_2998_4deb_8dd5_7f37d317f45b_Output_Payload = Array<{  overview: String,   VODPlatforms?: Array<{    vodURL: String,     logoPath: String,     name: String,     active: Boolean,     ID?: Number,     _?: Any  }>, 
+  regions: Array<String>, 
+  releaseDate: String, 
+  genres: Array<String>, 
+  lastUpdate: String, 
+  runtime: Number, 
+  ID?: Number, 
+  adult: Boolean, 
+  title: String, 
+  posterPath: String, 
+  _?: Any
+}>
+

@@ -2,7 +2,7 @@
 <mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
     <apikit:config name="filmvault_vodplatform-api-config" api="resource::f58e0416-d4a2-4186-a5f4-68878368bff4:filmvault_vodplatform-api:1.0.2:raml:zip:filmvault_vodplatform-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
     <flow name="filmvault_vodplatform-api-main">
-        <http:listener path="/api/*" config-ref="HTTP_Global_Listener_config">
+        <http:listener path="/api/*" config-ref="HTTP_VOD_Listener_config">
             <http:response statusCode="#[vars.httpStatus default 200]">
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:response>
@@ -94,7 +94,7 @@ output application/json
         </error-handler>
     </flow>
     <flow name="filmvault_vodplatform-api-console">
-        <http:listener path="/console/*" config-ref="HTTP_Global_Listener_config">
+        <http:listener path="/console/*" config-ref="HTTP_VOD_Listener_config">
             <http:response statusCode="#[vars.httpStatus default 200]">
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:response>
@@ -121,62 +121,66 @@ output application/json
         </error-handler>
     </flow>
     <flow name="put:\vodplatforms\(ID):application\json:filmvault_vodplatform-api-config">
-        <ee:transform doc:name="Transform Message">
+<flow-ref doc:name="Flow Reference" doc:id="667735ec-407e-47d5-927a-89e448a01b5c" name="putVODPlatform"/>
+		<!-- [STUDIO:"Transform Message"]		        <ee:transform doc:name="Transform Message">
             <ee:variables>
                 <ee:set-variable variableName="ID">attributes.uriParams.'ID'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
+        </ee:transform> [STUDIO] -->
+<!-- [STUDIO:"Transform Message"]        <ee:transform doc:name="Transform Message">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
----
+&#45;&#45;-
 {
   message: "platform details changed"
-}]]></ee:set-payload>
+}&#93;&#93;></ee:set-payload>
             </ee:message>
-        </ee:transform>
+        </ee:transform> [STUDIO] -->
     </flow>
     <flow name="delete:\vodplatforms\(ID):filmvault_vodplatform-api-config">
-        <ee:transform doc:name="Transform Message">
+        <flow-ref doc:name="Flow Reference" doc:id="e78a909d-13cb-403a-8875-03e586a60390" name="deleteVODPlatform"/>
+<!-- [STUDIO:"Transform Message"]		<ee:transform doc:name="Transform Message">
             <ee:variables>
                 <ee:set-variable variableName="ID">attributes.uriParams.'ID'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
+        </ee:transform> [STUDIO] -->
+<!-- [STUDIO:"Transform Message"]        <ee:transform doc:name="Transform Message">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
----
+&#45;&#45;-
 {
   message: "platform deleted"
-}]]></ee:set-payload>
+}&#93;&#93;></ee:set-payload>
             </ee:message>
-        </ee:transform>
+        </ee:transform> [STUDIO] -->
     </flow>
     <flow name="patch:\vodplatforms\(ID):application\json:filmvault_vodplatform-api-config">
-        <ee:transform doc:name="Transform Message">
+        <flow-ref doc:name="Flow Reference" doc:id="8a6b893d-3893-4c99-b0ea-ee9e5535c91a" name="patchVODPlatform"/>
+<!-- [STUDIO:"Transform Message"]		<ee:transform doc:name="Transform Message">
             <ee:variables>
                 <ee:set-variable variableName="ID">attributes.uriParams.'ID'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
+        </ee:transform> [STUDIO] -->
+<!-- [STUDIO:"Transform Message"]        <ee:transform doc:name="Transform Message">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
----
+&#45;&#45;-
 {
   message: "platform details updated"
-}]]></ee:set-payload>
+}&#93;&#93;></ee:set-payload>
             </ee:message>
-        </ee:transform>
+        </ee:transform> [STUDIO] -->
     </flow>
     <flow name="get:\vodplatforms:filmvault_vodplatform-api-config">
-        <ee:transform doc:name="Transform Message">
+<flow-ref doc:name="Flow Reference" doc:id="81c66499-a7d5-4b39-a8d0-fdb142a150bc" name="getVODPlatforms"/>
+		<!-- [STUDIO:"Transform Message"]        <ee:transform doc:name="Transform Message">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
----
+&#45;&#45;-
 [
   {
     ID: 1,
@@ -192,41 +196,43 @@ output application/json
     vodURL: "hbogo.com",
     active: true
   }
-]]]></ee:set-payload>
+&#93;&#93;&#93;></ee:set-payload>
             </ee:message>
-        </ee:transform>
+        </ee:transform> [STUDIO] -->
     </flow>
     <flow name="get:\vodplatforms\(ID):filmvault_vodplatform-api-config">
-        <ee:transform doc:name="Transform Message">
+        <flow-ref doc:name="Flow Reference" doc:id="ae4a7443-593a-46b3-8ed0-f1f4898c0f97" name="getVODPlatformByID"/>
+<!-- [STUDIO:"Transform Message"]		<ee:transform doc:name="Transform Message">
             <ee:variables>
                 <ee:set-variable variableName="ID">attributes.uriParams.'ID'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
+        </ee:transform> [STUDIO] -->
+<!-- [STUDIO:"Transform Message"]        <ee:transform doc:name="Transform Message">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
----
+&#45;&#45;-
 {
   ID: 1,
   name: "Netflix",
   logoPath: "/vod/netflix_logo.png",
   vodURL: "netflix.com",
   active: true
-}]]></ee:set-payload>
+}&#93;&#93;></ee:set-payload>
             </ee:message>
-        </ee:transform>
+        </ee:transform> [STUDIO] -->
     </flow>
     <flow name="post:\vodplatforms:application\json:filmvault_vodplatform-api-config">
-        <ee:transform doc:name="Transform Message">
+        <flow-ref doc:name="Flow Reference" doc:id="6caaf3a9-0a74-43b5-91c9-27f5ce861e0e" name="postVODPlatform"/>
+<!-- [STUDIO:"Transform Message"]		<ee:transform doc:name="Transform Message" doc:id="db209022-3398-4e6d-9152-e9408c40bb28">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
----
+&#45;&#45;-
 {
   message: "platform created"
-}]]></ee:set-payload>
+}&#93;&#93;></ee:set-payload>
             </ee:message>
-        </ee:transform>
+        </ee:transform> [STUDIO] -->
     </flow>
 </mule>

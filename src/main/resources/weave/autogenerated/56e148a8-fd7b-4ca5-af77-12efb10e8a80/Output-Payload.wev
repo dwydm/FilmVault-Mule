@@ -1,0 +1,11 @@
+%dw 2.0
+
+type auto_56e148a8_fd7b_4ca5_af77_12efb10e8a80_Output_Payload = {
+  vodURL: String, 
+  logoPath: String, 
+  name: String, 
+  active: Boolean, 
+  ID?: Number, 
+  _?: Any
+}
+

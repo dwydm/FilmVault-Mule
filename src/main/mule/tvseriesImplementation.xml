@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<flow name="getTVSeries" doc:id="e382feb4-591e-47c9-b095-f246c4b6df7b" >
+		<logger level="INFO" doc:name="Logger" doc:id="c93e8a56-f905-4796-8e2d-7c0bb783c70b" />
+	</flow>
+</mule>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="getVODPlatforms" doc:id="5cee1ee2-add8-4ec1-bd89-df052d13fd65" >
+		<http:request method="GET" doc:name="GET" doc:id="32ef4a33-df7f-424d-b9da-23adf105bad1" config-ref="HTTP_Backend_Request_configuration" path="/api/providers"/>
+		<logger level="INFO" doc:name="Logger" doc:id="d8917cb9-4641-4035-bf7e-ba2c51c5c307" />
+	</flow>
+	<flow name="getVODPlatformByID" doc:id="56e148a8-fd7b-4ca5-af77-12efb10e8a80" >
+		<http:request method="GET" doc:name="GET" doc:id="95e57622-a0ca-43fb-9d66-f5a459ed377b" config-ref="HTTP_Backend_Request_configuration" path="/api/providers/{ID}">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	'ID' : attributes.uriParams.ID
+}]]]></http:uri-params>
+		
+		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="d8c20015-9caa-4a71-aeb2-d9e9a8aec6d4" />
+	</flow>
+	<flow name="postVODPlatform" doc:id="694a3836-a19b-44bf-8949-daf4a5b59375" >
+		<ee:transform doc:name="Transform Message" doc:id="2a9335cb-46f4-4cd1-aa8c-25787f65a8ec" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	'name': payload.name,
+	logoPath: payload.logoPath,
+	vodURL: payload.vodURL,
+	active: payload.active
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<http:request method="POST" doc:name="POST" doc:id="9f83d47c-0020-4c98-a65b-687049e67066" path="/api/providers/add" config-ref="HTTP_Backend_Request_configuration"/>
+		<logger level="INFO" doc:name="Logger" doc:id="9a3ee7ab-4490-4736-9f11-218c21974138" />
+	</flow>
+	<flow name="patchVODPlatform" doc:id="6e51ced0-cea9-4f18-8e64-23e0ca32fb55" >
+		<ee:transform doc:name="Transform Message" doc:id="a5ebedbd-d358-40c9-8d29-1bc57384ca72" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	name: payload.name,
+	logoPath: payload.logoPath,
+	vodURL: payload.vodURL,
+	active: payload.active
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="157813c1-6241-44b1-884f-0fe7a475341b" />
+		<http:request method="PATCH" doc:name="PATCH" doc:id="ce97e30a-53cc-4afa-b7e7-6fac313cc9d6" config-ref="HTTP_Backend_Request_configuration" path="/api/providers/{ID}">
+			<http:body ><![CDATA[#[%dw 2.0
+output application/json
+---
+
+payload]]]></http:body>
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	'ID' : attributes.uriParams.ID
+}]]]></http:uri-params>
+		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="b1de01a6-2925-4490-9f23-a9350770f9fa" />
+	</flow>
+	<flow name="putVODPlatform" doc:id="984555da-e137-4f07-8a4f-ddcf8f95a19c">
+		<ee:transform doc:name="Transform Message" doc:id="8c658e9f-dd4c-413b-a53e-7de1e425800d" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	id: payload.ID default 0,
+	name: payload.name,
+	logoPath: payload.logoPath,
+	vodURL: payload.vodURL,
+	active: payload.active
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<http:request method="PUT" doc:name="PUT" doc:id="e201e108-6ea8-4a6b-9696-745b6d313359" config-ref="HTTP_Backend_Request_configuration" path="/api/providers/{ID}">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"ID" : attributes.uriParams.ID
+}]]]></http:uri-params>
+		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="a94da65e-b598-493f-9913-93268d6b7d53" />
+	</flow>
+	<flow name="deleteVODPlatform" doc:id="bfb34549-d7ca-42fe-bcd6-c8b050377159" >
+		<http:request method="DELETE" doc:name="DELETE" doc:id="4511dc37-e7ae-410b-b1a7-564befa38def" config-ref="HTTP_Backend_Request_configuration" path="/api/providers/{ID}">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	'ID' : attributes.uriParams.ID
+}]]]></http:uri-params>
+		</http:request>
+		<logger level="INFO" doc:name="Logger" doc:id="a76a792d-d233-444d-8fa9-2f34542be182" />
+	</flow>
+</mule>

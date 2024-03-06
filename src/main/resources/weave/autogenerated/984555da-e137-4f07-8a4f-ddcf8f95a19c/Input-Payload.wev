@@ -1,0 +1,11 @@
+%dw 2.0
+
+type auto_984555da_e137_4f07_8a4f_ddcf8f95a19c_Input_Payload = {
+  vodURL: String, 
+  logoPath: String, 
+  name: String, 
+  active: Boolean, 
+  ID?: Number, 
+  _?: Any
+}
+

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd ">
     <apikit:config name="filmvault_tvseries-api-config" api="resource::f58e0416-d4a2-4186-a5f4-68878368bff4:filmvault_tvseries-api:1.0.0:raml:zip:filmvault_tvseries-api.raml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
-    <flow name="filmvault_tvseries-api-main">
-        <http:listener path="/api/*" config-ref="HTTP_Global_Listener_config">
+	<flow name="filmvault_tvseries-api-main">
+        <http:listener path="/api/*" config-ref="HTTP_TVSeries_Listener_config">
             <http:response statusCode="#[vars.httpStatus default 200]">
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:response>
@@ -94,7 +94,7 @@ output application/json
         </error-handler>
     </flow>
     <flow name="filmvault_tvseries-api-console">
-        <http:listener path="/console/*" config-ref="HTTP_Global_Listener_config">
+        <http:listener path="/console/*" config-ref="HTTP_TVSeries_Listener_config">
             <http:response statusCode="#[vars.httpStatus default 200]">
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:response>
@@ -172,7 +172,8 @@ output application/json
         </ee:transform>
     </flow>
     <flow name="get:\tvseries:filmvault_tvseries-api-config">
-        <ee:transform doc:name="Transform Message">
+<!-- [STUDIO:"Flow Reference"]        <flow-ref doc:name="Flow Reference" doc:id="b4151b4b-0497-4fda-95c8-684bf16db52f" name="getTVSeries"/> [STUDIO] -->
+		<ee:transform doc:name="Transform Message">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json

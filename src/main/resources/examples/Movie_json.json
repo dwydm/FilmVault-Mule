@@ -1,0 +1,28 @@
+{
+    "ID": 1,
+    "adult": false,
+    "title": "Movie Title",
+    "overview": "Movie description",
+    "genres": ["sci-fi", "action"],
+    "releaseDate": "1999-03-24",
+    "runtime": 120,
+    "posterPath": "/poster/path.jpg",
+    "lastUpdate": "2024-02-01T22:37:20",
+    "regions": ["en-GB", "pl-PL"],
+    "VODPlatforms": [
+      {
+        "ID": 1,
+        "name": "Netflix",
+        "logoPath": "/vod/netflix_logo.png",
+        "vodURL": "netflix.com",
+        "active": true
+      },
+      {
+        "ID": 2,
+        "name": "HBO",
+        "logoPath": "/vod/hbogo_logo.png",
+        "vodURL": "hbogo.com",
+        "active": true
+      }
+    ]
+}

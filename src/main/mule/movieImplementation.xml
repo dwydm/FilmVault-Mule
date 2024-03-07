@@ -1,13 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
 	<flow name="getMovies" doc:id="03de2d00-2998-4deb-8dd5-7f37d317f45b" >
-		<flow-ref doc:name="Flow Reference" doc:id="72a1c073-d034-49b3-aa4a-a15eb7df4198" name="setQueryParams"/>
+		<flow-ref doc:name="Flow Reference" doc:id="469409da-ec98-4121-a5bb-f046b5329c87" name="setTitleQuery"/>
+		<logger level="INFO" doc:name="Logger" doc:id="779e609c-b522-414d-b54f-1bac21610985" />
+		<choice doc:name="Choice" doc:id="7eb533ee-452e-4a24-950b-d5346479689c" >
+			<when expression='#[vars.titleQuery != ""]'>
+				<http:request method="GET" doc:name="GET by query" doc:id="3c5871c0-bac4-4403-ab2c-3e29a0a375a9" config-ref="HTTP_Backend_Request_configuration" path="/api/movies/search?query={title}">
+					<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"title" : vars.titleQuery
+}]]]></http:uri-params>
+				</http:request>
+			</when>
+			<otherwise >
+				<http:request method="GET" doc:name="GET Popular" doc:id="d8777431-236a-44b6-bb09-80298afcf2e7" config-ref="HTTP_Backend_Request_configuration" path="/api/movies/popular?page={page}">
+					<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"page" : attributes.queryParams.page default 1
+}]]]></http:uri-params>
+				</http:request>
+			</otherwise>
+		</choice>
 		<logger level="INFO" doc:name="Logger" doc:id="dee28ab9-1317-4708-844f-2b6fb1147961" />
 	</flow>
-	<sub-flow name="setQueryParams" doc:id="293af69d-54e8-42ca-a542-68160b873342" >
+	<sub-flow name="setTitleQuery" doc:id="9ae3b72c-104f-4308-bdb8-0a255bb4d2e0" >
+		<set-variable value='#[attributes.queryParams.title default ""]' doc:name="to titleQuery" doc:id="6a6f6c7e-4169-496f-b385-5e455846a2e4" variableName="titleQuery"/>
 	</sub-flow>
+	<flow name="getMovieByID" doc:id="84468e05-2e89-48c2-9dae-1323ec261611" >
+		<http:request method="GET" doc:name="getMovieByID" doc:id="99208d4c-3f24-44fa-94c1-96fc75bfd39f" config-ref="HTTP_Backend_Request_configuration" path="/api/movies/{ID}">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"ID" : attributes.uriParams.ID
+}]]]></http:uri-params>
+		</http:request>
+		<ee:transform doc:name="Transform Message" doc:id="a1b22b49-e930-4c02-962c-351fcf5347a6" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	ID: payload.id,
+	title: payload.title,
+	overview: payload.overview,
+	genres: payload.genres map ( genre , indexOfGenre ) -> genre.name,
+	releaseDate: payload.releaseDate,
+	runtime: payload.runtime,
+	posterPath: payload.posterPath,
+	lastUpdate: payload.lastUpdate,
+	regions: payload.regions map ( region , indexOfRegion ) -> region.countryCode,
+	VODPlatforms: payload.vodPlatforms map ( vodPlatform , indexOfVodPlatform ) -> {
+		ID: vodPlatform.id,
+		name: vodPlatform.name,
+		logoPath: vodPlatform.logoPath,
+		vodURL: vodPlatform.vodURL,
+		active: vodPlatform.active
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="postMovie" doc:id="14fcfc6d-bc89-4d82-87ed-d35ba9aac6ea" />
+	<flow name="putMovie" doc:id="e7187882-24bb-40d9-8912-1b307df0c083" />
+	<flow name="patchMovie" doc:id="7cfd2600-ac3e-4bcc-b431-560bb81601cf" >
+	</flow>
+	<flow name="deleteMovie" doc:id="455a6b9f-e27c-4abf-86fa-d94523f6b479" />
 </mule>

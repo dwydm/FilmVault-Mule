@@ -121,55 +121,58 @@ output application/json
         </error-handler>
     </flow>
     <flow name="put:\movies\(ID):application\json:filmvault_movies-api-config">
-        <ee:transform doc:name="Transform Message">
+        <flow-ref doc:name="Flow Reference" doc:id="50b42120-af9e-458b-8c32-c77300bea939" name="putMovie"/>
+<!-- [STUDIO:"Transform Message"]		<ee:transform doc:name="Transform Message">
             <ee:variables>
                 <ee:set-variable variableName="ID">attributes.uriParams.'ID'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
+        </ee:transform> [STUDIO] -->
+<!-- [STUDIO:"Transform Message"]        <ee:transform doc:name="Transform Message">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
----
+&#45;&#45;-
 {
   message: "Movie details changed"
-}]]></ee:set-payload>
+}&#93;&#93;></ee:set-payload>
             </ee:message>
-        </ee:transform>
+        </ee:transform> [STUDIO] -->
     </flow>
     <flow name="delete:\movies\(ID):filmvault_movies-api-config">
-        <ee:transform doc:name="Transform Message">
+        <flow-ref doc:name="Flow Reference" doc:id="7204aaa0-79b1-4a69-a1a3-0a2029cc97eb" name="deleteMovie"/>
+<!-- [STUDIO:"Transform Message"]		<ee:transform doc:name="Transform Message">
             <ee:variables>
                 <ee:set-variable variableName="ID">attributes.uriParams.'ID'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
+        </ee:transform> [STUDIO] -->
+<!-- [STUDIO:"Transform Message"]        <ee:transform doc:name="Transform Message">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
----
+&#45;&#45;-
 {
   message: "Movie deleted"
-}]]></ee:set-payload>
+}&#93;&#93;></ee:set-payload>
             </ee:message>
-        </ee:transform>
+        </ee:transform> [STUDIO] -->
     </flow>
     <flow name="patch:\movies\(ID):application\json:filmvault_movies-api-config">
-        <ee:transform doc:name="Transform Message">
+        <flow-ref doc:name="Flow Reference" doc:id="1670db19-b80e-4781-a932-ce495ee728af" name="patchMovie"/>
+<!-- [STUDIO:"Transform Message"]		<ee:transform doc:name="Transform Message">
             <ee:variables>
                 <ee:set-variable variableName="ID">attributes.uriParams.'ID'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
+        </ee:transform> [STUDIO] -->
+<!-- [STUDIO:"Transform Message"]        <ee:transform doc:name="Transform Message">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
----
+&#45;&#45;-
 {
   message: "Movie details updated"
-}]]></ee:set-payload>
+}&#93;&#93;></ee:set-payload>
             </ee:message>
-        </ee:transform>
+        </ee:transform> [STUDIO] -->
     </flow>
     <flow name="get:\movies:filmvault_movies-api-config">
         <flow-ref doc:name="Flow Reference" doc:id="17abf364-694c-4761-ac60-09dbbdf98c4a" name="getMovies"/>
@@ -238,16 +241,17 @@ output application/json
         </ee:transform> [STUDIO] -->
     </flow>
     <flow name="get:\movies\(ID):filmvault_movies-api-config">
-        <ee:transform doc:name="Transform Message">
+        <flow-ref doc:name="Flow Reference" doc:id="a9390b14-0cf4-497c-8a01-94e6b89de1e1" name="getMovieByID"/>
+<!-- [STUDIO:"Transform Message"]		<ee:transform doc:name="Transform Message">
             <ee:variables>
                 <ee:set-variable variableName="ID">attributes.uriParams.'ID'</ee:set-variable>
             </ee:variables>
-        </ee:transform>
-        <ee:transform doc:name="Transform Message">
+        </ee:transform> [STUDIO] -->
+<!-- [STUDIO:"Transform Message"]        <ee:transform doc:name="Transform Message">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
----
+&#45;&#45;-
 {
   ID: 1,
   adult: false,
@@ -256,7 +260,7 @@ output application/json
   genres: [
     "sci-fi", 
     "action"
-  ],
+  &#93;,
   releaseDate: "1999-03-24",
   runtime: 136,
   posterPath: "/movieposters/the_matrix.jpg",
@@ -264,7 +268,7 @@ output application/json
   regions: [
     "pl-PL", 
     "en-US"
-  ],
+  &#93;,
   VODPlatforms: [
     {
       value: {
@@ -275,21 +279,22 @@ output application/json
         active: true
       }
     }
-  ]
-}]]></ee:set-payload>
+  &#93;
+}&#93;&#93;></ee:set-payload>
             </ee:message>
-        </ee:transform>
+        </ee:transform> [STUDIO] -->
     </flow>
     <flow name="post:\movies:application\json:filmvault_movies-api-config">
-        <ee:transform doc:name="Transform Message">
+        <flow-ref doc:name="Flow Reference" doc:id="a49c8bd2-b9e6-4647-b7c5-22515e7a7b67" name="postMovie"/>
+<!-- [STUDIO:"Transform Message"]		<ee:transform doc:name="Transform Message">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
----
+&#45;&#45;-
 {
   message: "Movie package successfully added"
-}]]></ee:set-payload>
+}&#93;&#93;></ee:set-payload>
             </ee:message>
-        </ee:transform>
+        </ee:transform> [STUDIO] -->
     </flow>
 </mule>

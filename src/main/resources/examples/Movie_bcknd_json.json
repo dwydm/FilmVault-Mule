@@ -1,0 +1,58 @@
+{
+    "id": 82,
+    "title": "Dune: Part Two",
+    "posterPath": "/87jZEVp4FW6GwTx56mbbqIQQF75.jpg",
+    "overview": "Follow the mythic journey of Paul Atreides as he unites with Chani and the Fremen while on a path of revenge against the conspirators who destroyed his family. Facing a choice between the love of his life and the fate of the known universe, Paul endeavors to prevent a terrible future only he can foresee.",
+    "releaseDate": "2024-02-27",
+    "runtime": 167,
+    "popularity": 1380.555,
+    "rating": 8.452,
+    "lastUpdate": "2024-03-07",
+    "voteCount": 949,
+    "apiID": 693134,
+    "vodPlatforms": [
+	
+        {
+            "id": 5,
+            "name": "Amazon Prime Video",
+            "logoPath": "/emthp39XA2YScoYL1p0sdbAH2WA.jpg",
+            "vodURL": "https://www.primevideo.com/",
+            "active": true
+        },
+        {
+            "id": 216,
+            "name": "Canal+",
+            "logoPath": "/hGvUo8KZTRLDZWcfFJS3gA8aenB.jpg",
+            "vodURL": "https://www.canalplus.com/",
+            "active": true
+        }
+	],
+    "regions": [
+		{
+            "id": 131,
+            "countryCode": "US",
+            "country": "United States of America",
+            "flag": "None"
+        },
+        {
+            "id": 45,
+            "countryCode": "GB",
+            "country": "United Kingdom",
+            "flag": "None"
+        }
+	],
+    "genres": [
+        {
+            "id": 18,
+            "name": "Adventure"
+        },
+        {
+            "id": 24,
+            "name": "Science Fiction"
+        },
+        {
+            "id": 17,
+            "name": "Action"
+        }
+    ]
+}

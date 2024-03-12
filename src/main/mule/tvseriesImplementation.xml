@@ -1,9 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
 	<flow name="getTVSeries" doc:id="e382feb4-591e-47c9-b095-f246c4b6df7b" >
+		<http:request method="GET" doc:name="getTVSeries" doc:id="57131a01-507f-41fb-9e22-2c71eadfa3b0" config-ref="HTTP_Backend_Request_configuration" path="/api/tvseries/"/>
 		<logger level="INFO" doc:name="Logger" doc:id="c93e8a56-f905-4796-8e2d-7c0bb783c70b" />
+	</flow>
+	<flow name="postTVSeries" doc:id="2abce5d4-2554-4e0c-9187-fe4f56ee54c5" >
+		<logger level="INFO" doc:name="Logger" doc:id="03ec88a4-f9f3-48d6-a838-af30d3f7c5ed" />
+	</flow>
+	<flow name="getVODPlatformsOfTVSeries" doc:id="b4444fb5-9461-45da-9a2f-7ddcc38e35a8" >
+		<logger level="INFO" doc:name="Logger" doc:id="f7e156bc-ce5b-484c-96fc-076cdfac6701" />
+	</flow>
+	<flow name="postVODPlatformOfTVSeriesADD" doc:id="c60a99d2-da01-4a0a-b1e4-70cb3a992c13" >
+		<logger level="INFO" doc:name="Logger" doc:id="1b259621-64b8-4212-8fed-3e9217bc364a" />
+	</flow>
+	<flow name="postVODPlatformOfTVSeriesREMOVE" doc:id="02b2d892-17a6-4764-9fdf-ef78e95521bd" >
+		<logger level="INFO" doc:name="Logger" doc:id="872e275f-263f-4007-8d1b-9b87d44dda8d" />
+	</flow>
+	<flow name="patchTVSeries" doc:id="9d769917-387d-4cb8-8b22-3e20325ab475" >
+		<logger level="INFO" doc:name="Logger" doc:id="71c0da39-2cf6-4ef2-9125-035304a97dad" />
+	</flow>
+	<flow name="deleteTVSeries" doc:id="5f763997-0fa1-47e0-b418-18731e15b735" >
+		<logger level="INFO" doc:name="Logger" doc:id="b51cf9f3-5bf8-4873-9172-04918ed6a455" />
 	</flow>
 </mule>

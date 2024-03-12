@@ -67,9 +67,26 @@ output application/json
 			</ee:message>
 		</ee:transform>
 	</flow>
-	<flow name="postMovie" doc:id="14fcfc6d-bc89-4d82-87ed-d35ba9aac6ea" />
+	<flow name="postMovie" doc:id="14fcfc6d-bc89-4d82-87ed-d35ba9aac6ea" >
+		<http:request method="POST" doc:name="postMovie" doc:id="9934f220-7d80-42a1-99e0-c55173a11c76" config-ref="HTTP_Backend_Request_configuration" path="/api/movies/add"/>
+	</flow>
 	<flow name="putMovie" doc:id="e7187882-24bb-40d9-8912-1b307df0c083" />
 	<flow name="patchMovie" doc:id="7cfd2600-ac3e-4bcc-b431-560bb81601cf" >
+		<http:request method="PATCH" doc:name="patchMovie" doc:id="2c1ec155-c929-41fd-aef1-6f6de1374226" path="/api/movies/{ID}" config-ref="HTTP_Backend_Request_configuration">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"ID" : attributes.uriParams.ID
+}]]]></http:uri-params>
+		</http:request>
 	</flow>
-	<flow name="deleteMovie" doc:id="455a6b9f-e27c-4abf-86fa-d94523f6b479" />
+	<flow name="deleteMovie" doc:id="455a6b9f-e27c-4abf-86fa-d94523f6b479" >
+		<http:request method="DELETE" doc:name="deleteMovie" doc:id="7a025f39-0c46-48d4-a653-3df370469718" path="/api/movies/{ID}" config-ref="HTTP_Backend_Request_configuration">
+			<http:uri-params ><![CDATA[#[output application/java
+---
+{
+	"ID" : attributes.uriParams.ID
+}]]]></http:uri-params>
+		</http:request>
+	</flow>
 </mule>

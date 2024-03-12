@@ -1774,4 +1774,13 @@ type: string]]></types:shape>
       </types:output-event>
     </types:processor-declaration>
   </types:enrichment>
+  <types:enrichment select="#9934f220-7d80-42a1-99e0-c55173a11c76">
+    <types:processor-declaration>
+      <types:output-event>
+        <types:message>
+          <types:payload type="Movie_bcknd_json"/>
+        </types:message>
+      </types:output-event>
+    </types:processor-declaration>
+  </types:enrichment>
 </types:mule>
